@@ -1,0 +1,219 @@
+STACK
+  Stack atau tumpukan merupakan salah satu teknik dalam struktur data yang cukup mudah dipahami. Biasanya kita akan menjumpai topik ini pada awal materi setelah array karena array dibutuhkan dalam implementasi stack. Beberapa macam struktur data lain memiliki algoritma yang lebih rumit bila dibandingkan dengan stack.
+*push(), berfungsi untuk memasukkan data.
+
+    public void push(String value) {
+       stack[++top] = value;
+    }
+*pop(), berfungsi untuk mengeluarkan data terakhir (atas).
+
+    public String pop() {
+       return stack[top — ];
+    }
+*peek(), berfungsi untuk melihat data yang berada pada tumpukan paling atas (akan dikeluarkan).
+
+    public String peek() {
+       return stack[top];
+    }
+*isEmpty(), berfungsi untuk menguji apakah stack masih kosong.
+
+    public boolean isEmpty() {
+       return top == -1;
+    }
+*isFull(), berfungsi untuk menguji apakah stack telah penuh.
+
+    public boolean isFull() {
+       return top == max-1;
+    }
+Contoh Stack
+#include <stdio.h> 
+#include <conio.h> 
+#include <string.h> 
+void inisialisasi(); 
+void push(); 
+void pop(); 
+void clear(); 
+#define MAX_STACK 10 
+typedef struct STACK 
+{ int top; 
+    char data[10][10];}; 
+    STACK tumpuk; 
+void inisialisasi() 
+{ tumpuk.top= -1;} 
+
+int IsFull() 
+{ if(tumpuk.top== MAX_STACK-1) return 1; else return 0;} 
+
+int IsEmpty() 
+{ if(tumpuk.top== -1) return 1; else return 0;} 
+
+void Push(char d[10]) 
+{ tumpuk.top++;
+strcpy(tumpuk.data[tumpuk.top],d); } 
+
+void Pop()
+{ printf("Elemen terakhir stack sudah dihapus, yaitu : %s\n",tumpuk.data 
+[tumpuk.top]);
+tumpuk.top--; } 
+
+void Clear()
+{ tumpuk.top=-1; } 
+void TampilStack()
+{ 
+    for(int i=tumpuk.top;i>=0;i--) 
+    { printf("Data : %s\n",tumpuk.data[i]); } 
+} 
+
+int main()
+{ 
+    int pil; 
+    inisialisasi(); 
+    char dt[10]; 
+do{ 
+    clrscr();
+
+ 
+ printf("PILIHAN PROSES\n");  
+ printf("[1] Masukan Data\n");  
+ printf("[2] Hapus Data\n");  
+ printf("[3] Tampil Isi Stack\n");  
+ printf("[4] Mereset Stack\n");  
+ printf("[5] Keluar\n");  
+ printf("Masukan kode pilihan (1 ... 5) : "); scanf("%d",&pil); 
+ 
+ switch(pil) 
+ { 
+     case 1: if(IsFull() != 1)
+     { printf("Nama = ");scanf("%s",dt); 
+     Push(dt); } 
+     else  
+     printf("\nSudah penuh, push gagal!\n");  
+     break; 
+     
+     case 2: if(IsEmpty() != 1) 
+     Pop(); 
+     else  
+     printf("\nMasih kosong!\n");  
+     break; 
+     
+     case 3: if(IsEmpty() != 1) 
+     TampilStack(); 
+     else  
+     printf("\nStack kosong!\n");  
+     break; 
+     
+     case 4: 
+     Clear();  
+     printf("\nStack sudah di hapus!\n");  
+     break; 
+     } 
+  getch(); 
+  } while(pil!= 5); 
+ getch(); 
+ }
+
+LINK LIST
+    berisi kumpulan data (node) yang
+tersusun secara sekuensial,saling sambung-menyambung dinamis dan tidak
+terbatas
+#Linked List sering disebut juga Senarai Berantai
+#Linked List saling terhubung dengan bantuan variabel pointer
+#Masing-masing data dalam Linked List disebut dengan node (simpul) yang menempati alokasi memori secara dinamis dan biasanya berupa record
+
+*Single Linked List merupakan suatu linked list yang hanya memiliki satu variabel pointer saja. Dimana pointer tersebut menunjuk ke node selanjutnya. Biasanya field pada tail menunjuk ke Null.
+    *Single Linked List non Circular
+Pembuatan struct bernama tnode berisi 2 field, yaitu field data bertipe integer dan
+field next yang bertipe pointer dari tnode.
+Deklarasi node dengan struct:
+struct tnode
+{
+int data;
+struct tnode *next;
+    *Single Linked List Circular
+Hampir sama dengan single linked list non circular, bahwa dibutuhkan sebuah kait untuk menghubungkan node-node data yang ada, dimana pada node terakhir atau tail yang semula menunjukkan NULL diganti dengan menunjuk ke kepala atau head. Dimana inisialisasi senarai berkait tunggal sirkular menggunakan struc adalah sebagai berikut:
+-Deklarasi Single Linked List Circular:
+Struct tnode
+{
+int data;
+tnode *next;
+};
+void main()
+{
+head = new tnode;
+head->next = head;
+}
+-Deklarasi menghapus node dari single linked list circular, menggunakan sintaks berikut:
+Void main()
+{
+hapus = new tnode;
+if( head != tail)
+{
+hapus = head;
+head = head->next;
+tail->next = head;
+delete hapus;
+}else
+{
+head = NULL;
+tail = NULL;
+}
+}
+*Double Linked List (Senarai berkait ganda)
+Double Linked List adalah elemen-elemen yang dihubungkan dengan dua pointer dalam satu elemen dan list dapat melintas baik di depan atau belakang. Elemen double linked list terdiri dari tiga bagian :
+1. Bagian data informasi
+2. Pointer next yang menunjuk ke elemen berikutnya
+3. Pointer prev yang menunjuk ke elemen sebelumnya
+    *Double Linked List non Circular
+Setiap node pada linked list mempunyai field yang berisi data dan pointer ke node berikutnya dan ke node sebelumnya. Untuk pembentukan node baru, mulanya pointer next dan prev akan menunjuk ke nilai NULL. Selanjutnya, pointer prev akan menunjuk ke node sebelumnya, dan pointer next akan menunjuk ke node selanjutnya pada list.
+    *Double Linked List Circular
+Double Linked List Circular (DLLC) adalah linked list dengan menggunakan pointer, dimana setiap node memiliki 3 field, yaitu 1 field pointer yang menunjuk pointer berikutnya (next), 1 field menunjuk pointer sebelumnya (prev), serta sebuah field yang berisi data untuk node tersebut dengan pointer next dan pre-nya menunjuk ke dirinya sendiri secara circular.
+
+GRAPH
+Graph adalah struktur data yang memiliki relasi many to many,yaitu tiap elementdapat memiliki 0 atau lebih dari 1 cabang.
+ Graph terbentuk dari 2 bagian, yaitu node dan edge.
+ Node: digunakan untuk menyimpan data
+Edge: cabang, untuk menghubungkan node satu dengan node lain.
+istilah dalam graph
+a. Vertex Adalah himpunan node / titik pada sebuah graph. 
+b. Edge Adalah himpunan garis yang menghubungkan tiap node / vertex. 
+c. Adjacent Adalah dua buah titik dikatakan berdekatan (adjacent) jika dua buah titik tersebut terhubung dengan sebuah sisi. Adalah Sisi e3 = v2v3 insident dengan titik v2 dan titik v3, tetapi sisi e3 = v2v3 tidak insident dengan titik v1 dan titik v4. Titik v1 adjacent dengan titik v2 dan titik v3, tetapi titik v1 tidak adjacent dengan titik v4.
+d. Weight Adalah Sebuah graf G = (V, E) disebut sebuah graf berbobot (weight graph), apabila terdapat sebuah fungsi bobot bernilai real W pada himpunan E, W : E ® R, nilai W(e) disebut bobot untuk sisi e, " e Î E. Graf berbobot tersebut dinyatakan pula sebagai G = (V, E, W). Graf berbobot G = (V, E, W) dapat menyatakan * suatu sistem perhubungan udara, di mana · V = himpunan kota-kota · E = himpunan penerbangan langsung dari satu kota ke kota lain · W = fungsi bernilai real pada E yang menyatakan jarak atau ongkos atau waktu suatu sistem jaringan komputer, di mana · V = himpunan komputer · E = himpunan jalur komunikasi langsung antar dua komputer · W = fungsi bernilai real pada E yang menyatakan jarak atau ongkos atau waktu
+e. Path Adalah Walk dengan setiap vertex berbeda. Contoh, P = D5B4C2A Sebuah walk (W) didefinisikan sebagai urutan (tdk nol) vertex & edge. Diawali origin vertex dan diakhiri terminus vertex. Dan setiap 2 edge berurutan adalah series. Contoh, W = A1B3C4B1A2. 
+f. Cycle Adalah Siklus ( Cycle ) atau Sirkuit ( Circuit ) Lintasan yang berawal dan berakhir pada simpul yang sama
+def shortest_path(graph, start, end, path=[]):
+    path = path + [start]
+    if start == end:
+        return path
+    if not start in graph:
+        return None
+    shortest = None
+
+    for node in graph[start]:
+
+    if node not in path:
+        newpath = shortest_path(graph, node, end, path)
+        if newpath:
+            if not shortest or len(newpath) < len(shortest):
+                shortest = newpath
+    return shortest
+print(shortest_path(graph,'a','d'))
+
+TREE
+    Tree merupakan salah satu bentuk struktur data tidak linear yang menggambarkan hubungan yang bersifat hirarkis(hubungan one to many) antara elemen-elemen. Tree bisa didefinisikan sebagai kumpulan simpul/node dengan satu elemen khusus yang disebut Root dan node lainnya. Tree juga adalah suatu graph yang acyclic, simple, connected yang tidak mengandung loop. 
+    Sebuah binary search tree (bst) adalah sebuah pohon biner yang boleh kosong, dan setiap nodenya harus memiliki identifier/value. Value pada semua node subpohon sebelah kiri adalah selalu lebih kecil dari value dari root, sedangkan value subpohon di sebelah kanan adalah sama atau lebih besar dari!alue pada root, masing-masing subpohon tersebut (kiri dankanan) itu sendiri adalah juga binary search tree.
+    *BINARY TREE
+    Binary tree adalah suatu tree dengan syarat bahwa tiap node (simpul) hanya boleh memiliki maksimal dua subtree dan kedua subtree tersebut harus terpisah. Tiap node dalam binary tree boleh memiliki paling banyak dua child (anak simpul),secara khusus anaknya dinamakan kiri dan kanan.Binary Tree merupakan himpunan vertex-vertex yang terdiri dari ' subtree (dengan disjoint) yaitu subtree kiri dan subtree kanan. Setiap vertex dalam binary tree mempunyai derajat keluar max=2 '.
+    ISTILAH DALAM TREE
+1. Predesesor node yang berada diatas node tertentu. (contoh : B predesesor dari E dan F)
+2. Succesor node yang berada dibawah node tertentu. (contoh : E dan F ;merupakan succesor dari B)
+3. Ancestor seluruh node yang terletak sebelum node tertentu dan terletak pada jalur yang sama. (contoh : A dan B merupakan ancestor dari      F) 
+4. Descendant seluruh node yang terletak sesudah node tertentu dan terletak pada jalur yang sama. (contoh : F dan B merupakan ancestor dari    A) 
+5. Parent predesesor satu level diatas satu node. (contoh B merupakan parent dari F)
+6. Child succesor satu level dibawah satu node. (contoh F merupakan child dari B)
+7. Sibling node yang memiliki parent yang sama dengan satu node.(contoh E dan F adalah sibling)
+8. Subtree bagian dari tree yang berupa suatu node beserta descendant-nya (contoh : subtree B, E, F dan subtree D, G, H)
+9. Size banyaknya node dalam suatu tree. (contoh : gambar tree diatas memiliki size =8)
+10.Height banyaknya tingkat/level dalam suatu tree. (contoh : gambar tree diatas memiliki height 3)
+11.Root (akar) node khusus dalam tree yang tidak memiliki predesesor(contoh : A)
+12.Leaf (daun) node-node dalam tree yang tidak memiliki daun. (contoh : node E,F,C,G,H)
+13.Degree (derajat) banyaknya child yang dimiliki oleh suatu node. (contoh : node A memiliki derajat 3, node B memiliki derajat 2)
